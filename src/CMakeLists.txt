@@ -4,7 +4,7 @@ project(raylib_alec C)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(${PROJECT_NAME} main.c player.c)
+add_executable(${PROJECT_NAME} main.c)
 
 # Proudly stollen from https://github.com/raysan5/raylib/blob/master/projects/CMake/CMakeLists.txt
 # Dependencies
