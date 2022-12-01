@@ -8,6 +8,7 @@ struct Player {
     float speed;
     float radius;
 };
+
 typedef struct Player Player;
 
 Player new_default_player();
