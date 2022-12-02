@@ -29,3 +29,6 @@ endif()
 add_subdirectory(ecs)
 target_link_libraries(${PROJECT_NAME} raylib ecs)
 
+target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wextra -pedantic -Werror)
+target_compile_options(ecs PUBLIC -Wall -Wextra -pedantic -Werror)
+
