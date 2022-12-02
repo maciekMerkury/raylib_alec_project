@@ -25,5 +25,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
   endif()
 endif()
 
+add_subdirectory(ecs)
+target_link_libraries(${PROJECT_NAME} raylib ecs)
 target_link_libraries(${PROJECT_NAME} raylib)
 
