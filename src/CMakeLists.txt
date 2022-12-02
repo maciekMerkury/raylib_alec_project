@@ -3,6 +3,7 @@ project(raylib_alec C)
 
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(OpenGL_GL_PREFERENCE GLVND)
 
 add_executable(${PROJECT_NAME} main.c)
 
@@ -27,5 +28,4 @@ endif()
 
 add_subdirectory(ecs)
 target_link_libraries(${PROJECT_NAME} raylib ecs)
-target_link_libraries(${PROJECT_NAME} raylib)
 
