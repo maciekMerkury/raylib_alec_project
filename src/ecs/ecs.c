@@ -22,8 +22,7 @@ ecs_init(size_t init_cap, ...)
             exit(1);
         }
 
-        state.components[i] =
-            (CompactContainer){.element_size = size, .cap = init_cap, .data = data};
+        state.components[i] = (CompactContainer){.element_size = size, .cap = init_cap, .data = data};
 
         if (++i >= MAXIMUM_COMPONENT_COUNT) {
             printf("No more than 64 component types are permitted, see ecs.h for more details\n");

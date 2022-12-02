@@ -19,5 +19,4 @@ typedef struct {
 
 /// initialises the ecs using with the component order given.
 /// the last va_arg must be a 0, otherwise function will not work correctly
-
-__attribute__ ((sentinel)) EcsState ecs_init(size_t init_cap, ...);
+__attribute__((sentinel)) EcsState ecs_init(size_t init_cap, ...);

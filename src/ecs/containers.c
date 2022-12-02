@@ -3,7 +3,8 @@
 #include <stdlib.h>
 
 // FIXME: This function is quite unsafe, as it relies purely on the assumption that element_i will refer to a living entity
-void* get_element(CompactContainer *const container, size_t element_i)
+void*
+get_element(CompactContainer* const container, size_t element_i)
 {
     if (element_i >= container->cap) {
         printf("trying to get element grater than capacity. element_i: %lu, cap: %lu", element_i, container->cap);

@@ -16,4 +16,4 @@ typedef struct {
 
 } CompactContainer;
 
-void* get_element(CompactContainer *const container, size_t element_i);
+void* get_element(CompactContainer* const container, size_t element_i);
