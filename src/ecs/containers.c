@@ -11,6 +11,5 @@ get_element(CompactContainer* const container, size_t element_i)
         exit(1);
     }
 
-    // convertion to char* is required, as pointer arithmetics on void* are not allowed
-    return (char*)container->data + element_i * container->element_size;
+    return container->data[element_i];
 }

@@ -10,10 +10,11 @@ typedef struct {
     /// The maximum number of elements that can fit in the currently allocated memory
     size_t cap;
 
-    /// The array holding the components.
-    /// Its size == element_size * cap
-    void* data;
+    /// The array holding pointer the components.
+    /// Its size == sizeof(any*) * cap
+    void** data;
 
 } CompactContainer;
 
+/// Returns the pointer the component
 void* get_element(CompactContainer* const container, size_t element_i);

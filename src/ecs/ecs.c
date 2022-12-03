@@ -7,7 +7,6 @@
 EcsState
 ecs_init(size_t init_cap, ...)
 {
-    printf("penus works\n");
     EcsState state = {0};
 
     va_list ap;
@@ -15,9 +14,9 @@ ecs_init(size_t init_cap, ...)
 
     int i = 0;
     for (size_t size = va_arg(ap, size_t); size != 0; size = va_arg(ap, size_t)) {
-        void* data = calloc(size, init_cap);
+        void** data = calloc(sizeof(void*), init_cap);
         if (!data) {
-            printf("[%s; %d]:\tcould not malloc %lu bytes\n", __FILE__, __LINE__, size * init_cap);
+            printf("[%s; %d]:\tcould not malloc %lu bytes\n", __FILE__, __LINE__, sizeof(void*) * init_cap);
             perror("malloc error: ");
             exit(1);
         }
