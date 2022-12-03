@@ -36,3 +36,7 @@ ecs_init(size_t init_cap, ...)
 
     return state;
 }
+
+QueryResult ecs_query(EcsState *const state, uint64_t mask)
+{
+}
