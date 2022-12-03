@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h>
+#include <stddef.h>
 
 typedef struct {
-    uint64_t id;
+    size_t id;
 } EntityId;
