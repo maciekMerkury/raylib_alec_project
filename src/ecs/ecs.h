@@ -12,6 +12,7 @@
 
 typedef struct {
     CompactContainer components[MAXIMUM_COMPONENT_COUNT];
+    int component_type_count;
     size_t component_type_count;
 
     size_t entity_count;
