@@ -23,12 +23,13 @@ typedef struct {
     EntityId *ids;
 } QueryResult;
 
+#define SHORT_ECS_INIT(init_cap, ...) ecs_init(init_cap, __VA_ARGS__, NULL)
+
 /// initialises the ecs using with the component order given.
 /// the last va_arg must be a 0, otherwise function will not work correctly
 __attribute__((sentinel)) EcsState ecs_init(size_t init_cap, ...);
-QueryResult ecs_query(EcsState *const state, uint64_t mask);
 
-/// TODO: maybe come up with a better idea than this
-typedef enum {
-} ComponentOrder;
+/// creates an entity with components provided.
+/// returns the EntityId to the newly-created entity
+__attribute__((sentinel)) EntityId init_entity(EcsState* const state, ...);
 
