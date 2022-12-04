@@ -8,7 +8,8 @@ typedef struct {
     size_t element_size;
 
     /// The array holding pointer the components.
-    /// Its size == sizeof(any*) * cap
+    /// I believe that the size of all datatype except functions is the same, but i am not 100% sure
+    /// Its size == sizeof(void*) * cap
     void** data;
 } CompactContainer;
 
