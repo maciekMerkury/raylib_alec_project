@@ -16,5 +16,10 @@ typedef struct {
 
 } CompactContainer;
 
+typedef struct{
+    size_t inner_size;
+    void* data;
+} GenericComponent;
+
 /// Returns the pointer the component
-void* get_element(CompactContainer* const container, size_t element_i);
+GenericComponent get_element(CompactContainer* const container, size_t element_i);
