@@ -5,7 +5,7 @@
 #include "queue.h"
 
 void
-push(FIFOQueue* const queue, EntityId id)
+push(EntityQueue* const queue, EntityId id)
 {
     Node* new = malloc(sizeof(Node));
     new->value = id;
@@ -15,7 +15,7 @@ push(FIFOQueue* const queue, EntityId id)
 }
 
 EntityId
-pop(FIFOQueue* const queue)
+pop(EntityQueue* const queue)
 {
     if (is_empty(queue)) {
         printf("cannot pop a value from an empty queue\n");
@@ -32,7 +32,7 @@ pop(FIFOQueue* const queue)
 }
 
 inline bool
-is_empty(const FIFOQueue* const queue)
+is_empty(const EntityQueue* const queue)
 {
     return queue->first == NULL;
 }

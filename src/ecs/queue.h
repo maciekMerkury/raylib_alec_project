@@ -15,14 +15,14 @@ struct Node {
 typedef struct {
     Node* first;
     Node* last;
-} FIFOQueue;
+} EntityQueue;
 
 /// pushes the id to the end of the queue
-void push(FIFOQueue* const queue, EntityId id);
+void push(EntityQueue* const queue, EntityId id);
 
 /// pops an id from the top of the queue.
 /// will panic if the queue is empty
-EntityId pop(FIFOQueue* const queue);
+EntityId pop(EntityQueue* const queue);
 
 /// returns true if the queue is empty
-bool is_empty(const FIFOQueue* const queue);
+bool is_empty(const EntityQueue* const queue);
