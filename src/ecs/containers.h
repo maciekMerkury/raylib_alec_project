@@ -13,7 +13,7 @@ typedef struct {
     void** data;
 } CompactContainer;
 
-typedef struct{
+typedef struct {
     size_t inner_size;
     void* data;
 } GenericComponent;

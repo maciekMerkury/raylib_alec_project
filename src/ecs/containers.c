@@ -14,10 +14,7 @@ get_element(CompactContainer* const container, size_t element_i)
     }
     */
 
-    GenericComponent comp = {
-        .inner_size = container->element_size,
-        .data = container->data[element_i]
-    };
+    GenericComponent comp = {.inner_size = container->element_size, .data = container->data[element_i]};
 
     return comp;
 }

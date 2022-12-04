@@ -13,7 +13,7 @@
 
 /// set handles to null and free memory
 void
-reset_components(EcsState *const state, EntityId id)
+reset_components(EcsState* const state, EntityId id)
 {
     if (id.id > state->entity_count) {
         printf("trying to access an invalid entity. id = %lu, entity_count = %lu\n", id.id, state->entity_count);
@@ -69,11 +69,12 @@ init_entity(EcsState* const state, ...)
             state->entity_capacity += REALLOC_INCREASE;
 
             for (int i = 0; i < state->component_type_count; ++i) {
-                CompactContainer *cont = &state->components[i];
+                CompactContainer* cont = &state->components[i];
 
                 cont->data = reallocarray(cont->data, state->entity_capacity, sizeof(void*));
                 if (!cont->data) {
-                    printf("could not resize the component type %i. new size was supposed to be %lu\n", i, state->entity_capacity);
+                    printf("could not resize the component type %i. new size was supposed to be %lu\n", i,
+                           state->entity_capacity);
                     perror("malloc error: ");
                     exit(1);
                 }
@@ -102,10 +103,11 @@ init_entity(EcsState* const state, ...)
 }
 
 void
-kill_entity(EcsState *const state, EntityId entity)
+kill_entity(EcsState* const state, EntityId entity)
 {
     if (entity.id >= state->entity_count) {
-        printf("trying to kill an entity outside of entity_count. id = %lu, count = %lu", entity.id, state->entity_count);
+        printf("trying to kill an entity outside of entity_count. id = %lu, count = %lu", entity.id,
+               state->entity_count);
         exit(1);
     }
 
@@ -118,8 +120,8 @@ get_all_components(EcsState* const state, ...)
 {
 
     size_t component_type_count = 0;
-    int *component_indices = calloc(state->component_type_count, sizeof(int));
-    CompactContainer **components = calloc(state->component_type_count, sizeof(CompactContainer*));
+    int* component_indices = calloc(state->component_type_count, sizeof(int));
+    CompactContainer** components = calloc(state->component_type_count, sizeof(CompactContainer*));
 
     va_list ap;
     va_start(ap, state);
@@ -127,7 +129,8 @@ get_all_components(EcsState* const state, ...)
     // TODO: finish this
     for (int i = va_arg(ap, int); i > -1; i = va_arg(ap, int)) {
         if (i >= state->component_type_count) {
-            printf("trying to query component out of bounds. i = %i, type_count = %i\n", i, state->component_type_count);
+            printf("trying to query component out of bounds. i = %i, type_count = %i\n", i,
+                   state->component_type_count);
             exit(1);
         }
 
@@ -143,34 +146,33 @@ get_all_components(EcsState* const state, ...)
     components = reallocarray(components, component_type_count, sizeof(CompactContainer));
 
     return (QueryResult){
-        .component_type_count = component_type_count,
-        .component_indices = component_indices,
-        .components = components
-    };
+        .component_type_count = component_type_count, .component_indices = component_indices, .components = components};
 }
 
 EntityQueryResult
-get_entity_components(EcsState *const state, EntityId entity, ...)
+get_entity_components(EcsState* const state, EntityId entity, ...)
 {
     if (entity.id > state->entity_count) {
-        printf("trying to query for an entity out of entity_count. id = %lu, entity_count = %lu\n", entity.id, state->entity_count);
+        printf("trying to query for an entity out of entity_count. id = %lu, entity_count = %lu\n", entity.id,
+               state->entity_count);
         exit(1);
     }
 
     size_t component_type_count = 0;
-    int *component_indices = calloc(state->component_type_count, sizeof(int));
-    GenericComponent *components = calloc(state->component_type_count, sizeof(GenericComponent));
+    int* component_indices = calloc(state->component_type_count, sizeof(int));
+    GenericComponent* components = calloc(state->component_type_count, sizeof(GenericComponent));
 
     va_list ap;
     va_start(ap, entity);
 
     for (int i = va_arg(ap, int); i > -1; i = va_arg(ap, int)) {
         if (i >= state->component_type_count) {
-            printf("trying to query component out of bounds. i = %i, type_count = %i\n", i, state->component_type_count);
+            printf("trying to query component out of bounds. i = %i, type_count = %i\n", i,
+                   state->component_type_count);
             exit(1);
         }
 
-        components[component_type_count] = (GenericComponent) {
+        components[component_type_count] = (GenericComponent){
             .inner_size = state->components[i].element_size,
             .data = state->components[i].data[entity.id],
         };
@@ -184,10 +186,6 @@ get_entity_components(EcsState *const state, EntityId entity, ...)
     component_indices = reallocarray(component_indices, component_type_count, sizeof(int));
     components = reallocarray(components, component_type_count, sizeof(GenericComponent));
 
-    return (EntityQueryResult) {
-        .component_type_count = component_type_count,
-        .component_indices = component_indices,
-        .components = components
-    };
+    return (EntityQueryResult){
+        .component_type_count = component_type_count, .component_indices = component_indices, .components = components};
 }
-

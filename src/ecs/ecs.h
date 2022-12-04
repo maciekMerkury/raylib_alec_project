@@ -26,17 +26,16 @@ typedef struct {
     const size_t component_type_count;
 
     /// The indeces corresponding to the component type in EcsState
-    const int *const component_indices;
-    CompactContainer*const *const components;
+    const int* const component_indices;
+    CompactContainer* const* const components;
 } QueryResult;
 
 typedef struct {
     const size_t component_type_count;
 
-    const int *const component_indices;
-    GenericComponent *const components;
+    const int* const component_indices;
+    GenericComponent* const components;
 } EntityQueryResult;
-
 
 #define todo(thing) static_assert(false, "unfinished: " #thing "\n")
 
@@ -51,7 +50,7 @@ __attribute__((sentinel)) EcsState ecs_init(size_t init_cap, ...);
 __attribute__((sentinel)) EntityId init_entity(EcsState* const state, ...);
 #define SHORT_INIT_ENTITY(state, ...) init_entity(state, __VA_ARGS__, -1, NULL)
 
-void kill_entity(EcsState *const state, EntityId entity);
+void kill_entity(EcsState* const state, EntityId entity);
 
 /// SAFETY: the value before sentinel must be -1. sentinel will not be used, but is included as a reminder to use -1
 __attribute__((sentinel)) QueryResult get_all_components(EcsState* const state, ...);
@@ -61,6 +60,5 @@ __attribute__((sentinel)) QueryResult get_all_components(EcsState* const state, 
 //EntityQueryResult get_entity_components(EcsState *const state, uint64_t mask);
 
 /// SAFETY: the value before sentinel must be -1. sentinel will not be used, but is included as a reminder to use -1
-__attribute__((sentinel)) EntityQueryResult get_entity_components(EcsState *const state, EntityId entity, ...);
+__attribute__((sentinel)) EntityQueryResult get_entity_components(EcsState* const state, EntityId entity, ...);
 #define ECS_GET_ENTITY_COMPONENTS(state, entity, ...) get_entity_components(state, entity, __VA_ARGS__, -1, NULL)
-

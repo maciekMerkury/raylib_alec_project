@@ -22,14 +22,21 @@ test_main()
 
     SetTargetFPS(60);
 
-    Vector2 ballPosition = { (float)s_w/2, (float)s_h/2 };
+    Vector2 ballPosition = {(float)s_w / 2, (float)s_h / 2};
 
     while (!WindowShouldClose()) {
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
-
+        if (IsKeyDown(KEY_RIGHT)) {
+            ballPosition.x += 2.0f;
+        }
+        if (IsKeyDown(KEY_LEFT)) {
+            ballPosition.x -= 2.0f;
+        }
+        if (IsKeyDown(KEY_UP)) {
+            ballPosition.y -= 2.0f;
+        }
+        if (IsKeyDown(KEY_DOWN)) {
+            ballPosition.y += 2.0f;
+        }
 
         BeginDrawing();
         {
@@ -44,12 +51,20 @@ test_main()
 }
 
 void
-update_ball_position(Position *pos)
+update_ball_position(Position* pos)
 {
-    if (IsKeyDown(KEY_RIGHT)) pos->position.x += 2.0f;
-    if (IsKeyDown(KEY_LEFT)) pos->position.x -= 2.0f;
-    if (IsKeyDown(KEY_UP)) pos->position.y -= 2.0f;
-    if (IsKeyDown(KEY_DOWN)) pos->position.y += 2.0f;
+    if (IsKeyDown(KEY_RIGHT)) {
+        pos->position.x += 2.0f;
+    }
+    if (IsKeyDown(KEY_LEFT)) {
+        pos->position.x -= 2.0f;
+    }
+    if (IsKeyDown(KEY_UP)) {
+        pos->position.y -= 2.0f;
+    }
+    if (IsKeyDown(KEY_DOWN)) {
+        pos->position.y += 2.0f;
+    }
 }
 
 int
@@ -63,7 +78,7 @@ main()
     int s_h = 400;
 
     {
-        EntityQueryResult res = ECS_GET_ENTITY_COMPONENTS(&state, ball_id, POSITION); 
+        EntityQueryResult res = ECS_GET_ENTITY_COMPONENTS(&state, ball_id, POSITION);
 
         // Debug asserts to make sure stuff works
         assert(res.component_type_count == 1);
@@ -72,17 +87,16 @@ main()
         printf("size = %lu\n", res.components[0].inner_size);
         assert(res.components[0].inner_size == sizeof(Position));
 
-
-        Position *id_pos = res.components[0].data;
-        id_pos->position = (Vector2) { (float)s_w/2, (float)s_h/2 };
+        Position* id_pos = res.components[0].data;
+        id_pos->position = (Vector2){(float)s_w / 2, (float)s_h / 2};
     } // res is dropped here
 
     InitWindow(s_w, s_h, "another raylib window");
     SetTargetFPS(60);
 
-    while(!WindowShouldClose()) {
+    while (!WindowShouldClose()) {
         // Normally one would query for more than one component
-        Position *ball_pos = ECS_GET_ENTITY_COMPONENTS(&state, ball_id, POSITION).components[0].data;
+        Position* ball_pos = ECS_GET_ENTITY_COMPONENTS(&state, ball_id, POSITION).components[0].data;
 
         update_ball_position(ball_pos);
 
@@ -97,4 +111,3 @@ main()
 
     return 0;
 }
-
