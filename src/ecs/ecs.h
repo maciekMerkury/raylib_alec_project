@@ -3,8 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "entity_id.h"
 #include "containers.h"
+#include "entity_id.h"
 #include "queue.h"
 
 // uint_64 is used for flags in query, which limits the number of component types
