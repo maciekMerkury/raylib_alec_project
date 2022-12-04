@@ -23,10 +23,22 @@ typedef struct {
 } EcsState;
 
 typedef struct {
-    size_t id_count;
-    EntityId *ids;
+    const size_t component_type_count;
+
+    /// The indeces corresponding to the component type in EcsState
+    const int *const component_indices;
+    CompactContainer*const *const components;
 } QueryResult;
 
+typedef struct {
+    const size_t component_type_count;
+
+    const int *const component_indices;
+    GenericComponent *const components;
+} EntityQueryResult;
+
+
+#define todo(thing) static_assert(false, "unfinished: " #thing "\n")
 #define SHORT_ECS_INIT(init_cap, ...) ecs_init(init_cap, __VA_ARGS__, NULL)
 
 /// initialises the ecs using with the component order given.
