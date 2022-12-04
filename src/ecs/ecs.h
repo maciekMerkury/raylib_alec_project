@@ -15,7 +15,8 @@ typedef struct {
     int component_type_count;
 
     size_t entity_count;
-    FIFOQueue empty_entity_queue;
+    /// The maximum number of elements that can fit in the currently allocated memory
+    size_t entity_capacity;
 } EcsState;
 
 typedef struct {

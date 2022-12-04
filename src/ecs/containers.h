@@ -7,13 +7,9 @@ typedef struct {
     /// The size of a singular component held by this container
     size_t element_size;
 
-    /// The maximum number of elements that can fit in the currently allocated memory
-    size_t cap;
-
     /// The array holding pointer the components.
     /// Its size == sizeof(any*) * cap
     void** data;
-
 } CompactContainer;
 
 typedef struct{
