@@ -7,7 +7,7 @@
 void
 push(EntityQueue* const queue, EntityId id)
 {
-    Node* new = malloc(sizeof(Node));
+    Node* new = malloc(sizeof(typeof(*new)));
     new->value = id;
     new->next = NULL;
 

@@ -36,7 +36,7 @@ ecs_init(size_t init_cap, ...)
     va_start(ap, init_cap);
 
     for (int size = va_arg(ap, size_t); size > -1; size = va_arg(ap, size_t)) {
-        void** data = calloc(sizeof(void*), init_cap);
+        void** data = calloc(sizeof(typeof(*data)), init_cap);
         if (!data) {
             printf("[%s; %d]:\tcould not malloc %lu bytes\n", __FILE__, __LINE__, sizeof(void*) * init_cap);
             perror("malloc error: ");
@@ -71,7 +71,7 @@ init_entity(EcsState* const state, ...)
             for (int i = 0; i < state->component_type_count; ++i) {
                 CompactContainer* cont = &state->components[i];
 
-                cont->data = reallocarray(cont->data, state->entity_capacity, sizeof(void*));
+                cont->data = reallocarray(cont->data, state->entity_capacity, sizeof(typeof(*cont->data)));
                 if (!cont->data) {
                     printf("could not resize the component type %i. new size was supposed to be %lu\n", i,
                            state->entity_capacity);
@@ -120,8 +120,8 @@ get_all_components(EcsState* const state, ...)
 {
 
     size_t component_type_count = 0;
-    int* component_indices = calloc(state->component_type_count, sizeof(int));
-    CompactContainer** components = calloc(state->component_type_count, sizeof(CompactContainer*));
+    int* component_indices = calloc(state->component_type_count, sizeof(typeof(*component_indices)));
+    CompactContainer** components = calloc(state->component_type_count, sizeof(typeof(*components)));
 
     va_list ap;
     va_start(ap, state);
@@ -142,8 +142,8 @@ get_all_components(EcsState* const state, ...)
     va_end(ap);
 
     // Shrink the arrays to not waste memory
-    component_indices = reallocarray(component_indices, component_type_count, sizeof(int));
-    components = reallocarray(components, component_type_count, sizeof(CompactContainer));
+    component_indices = reallocarray(component_indices, component_type_count, sizeof(typeof(*component_indices)));
+    components = reallocarray(components, component_type_count, sizeof(typeof(*components)));
 
     return (QueryResult){
         .component_type_count = component_type_count, .component_indices = component_indices, .components = components};
@@ -159,8 +159,8 @@ get_entity_components(EcsState* const state, EntityId entity, ...)
     }
 
     size_t component_type_count = 0;
-    int* component_indices = calloc(state->component_type_count, sizeof(int));
-    GenericComponent* components = calloc(state->component_type_count, sizeof(GenericComponent));
+    int* component_indices = calloc(state->component_type_count, sizeof(typeof(*component_indices)));
+    GenericComponent* components = calloc(state->component_type_count, sizeof(typeof(*components)));
 
     va_list ap;
     va_start(ap, entity);
@@ -183,8 +183,8 @@ get_entity_components(EcsState* const state, EntityId entity, ...)
 
     va_end(ap);
 
-    component_indices = reallocarray(component_indices, component_type_count, sizeof(int));
-    components = reallocarray(components, component_type_count, sizeof(GenericComponent));
+    component_indices = reallocarray(component_indices, component_type_count, sizeof(typeof(*component_indices)));
+    components = reallocarray(components, component_type_count, sizeof(typeof(*components)));
 
     return (EntityQueryResult){
         .component_type_count = component_type_count, .component_indices = component_indices, .components = components};
