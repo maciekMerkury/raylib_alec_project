@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(raylib_alec)
+
+enable_testing()
 add_subdirectory(src)
 
 add_custom_target(
